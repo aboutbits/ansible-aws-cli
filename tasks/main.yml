@@ -1,11 +1,11 @@
 ---
 - name: Update the server
-  apt:
+  ansible.builtin.apt:
     upgrade: safe
     update_cache: yes
 
 - name: Install required system packages
-  apt:
+  ansible.builtin.apt:
     name: '{{ item }}'
     state: latest
   loop:
@@ -20,20 +20,20 @@
     - unzip
 
 - name: Uninstall AWS CLI V1
-  apt:
+  ansible.builtin.apt:
     name: awscli
     state: absent
 
 - name: Delete the old AWS CLI V2 temp files
-  file:
+  ansible.builtin.file:
     path: /tmp/aws
     state: absent
 
 - name: Download and unzip the AWS CLI V2
-  unarchive:
+  ansible.builtin.unarchive:
     src: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
     dest: /tmp
     remote_src: yes
 
 - name: Run the AWS CLI V2 installer
-  shell: "/tmp/aws/install --update"
+  ansible.builtin.shell: "/tmp/aws/install --update"
