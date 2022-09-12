@@ -7,8 +7,9 @@ Installation of the AWS CLI.
 
 ```yaml
 - hosts: all
-  roles:
-    - role: ansible-aws-cli
+  tasks:
+    - ansible.builtin.include_role:
+        name: ansible-aws-cli
 ```
 
 ## Versioning
